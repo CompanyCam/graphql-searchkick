@@ -44,7 +44,7 @@ PLATFORMS
 DEPENDENCIES
   appraisal
   codeclimate-test-reporter
-  graphql (~> 1.9)
+  graphql (~> 1.10)
   graphql-searchkick!
   rake (~> 12.0)
   rspec (~> 3.0)
