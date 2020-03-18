@@ -3,7 +3,7 @@
 RSpec.describe GraphQL::Searchkick::SearchableExtension do
   let(:field) do
     Field.new({
-      type: UserType,
+      type: ProjectType,
       name: :testing,
       search: Project,
       null: true

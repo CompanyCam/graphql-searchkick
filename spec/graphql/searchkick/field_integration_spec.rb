@@ -4,7 +4,7 @@ RSpec.describe GraphQL::Searchkick::FieldIntegration do
   describe 'search' do
     let(:field_config) do
       {
-        type: UserType,
+        type: ProjectType,
         name: :testing,
         search: search,
         null: true
