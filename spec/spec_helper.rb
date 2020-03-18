@@ -1,6 +1,8 @@
 require 'bundler/setup'
 require 'graphql/searchkick'
 
+ENV['ELASTICSEARCH_URL'] = 'http://localhost:9200'
+
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 
 RSpec.configure do |config|
@@ -12,5 +14,19 @@ RSpec.configure do |config|
 
   config.expect_with :rspec do |c|
     c.syntax = :expect
+  end
+
+  config.before(:suite) do
+    # reindex models
+    Project.reindex
+
+    # and disable callbacks
+    Searchkick.disable_callbacks
+  end
+
+  config.around(:each, search: true) do |example|
+    Searchkick.callbacks(true) do
+      example.run
+    end
   end
 end

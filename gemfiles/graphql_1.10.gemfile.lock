@@ -10,6 +10,9 @@ GEM
   specs:
     activemodel (6.0.2.1)
       activesupport (= 6.0.2.1)
+    activerecord (6.0.2.1)
+      activemodel (= 6.0.2.1)
+      activesupport (= 6.0.2.1)
     activesupport (6.0.2.1)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 0.7, < 2)
@@ -70,6 +73,7 @@ GEM
       json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.2)
+    sqlite3 (1.4.2)
     thor (1.0.1)
     thread_safe (0.3.6)
     tzinfo (1.2.6)
@@ -80,6 +84,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activerecord (~> 6.0)
   appraisal
   codeclimate-test-reporter
   elasticsearch-extensions (~> 0.0.31)
@@ -87,6 +92,7 @@ DEPENDENCIES
   graphql-searchkick!
   rake (~> 12.0)
   rspec (~> 3.0)
+  sqlite3
 
 BUNDLED WITH
    2.1.4
