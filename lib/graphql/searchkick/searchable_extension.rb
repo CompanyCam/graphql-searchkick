@@ -5,8 +5,6 @@ require 'graphql'
 module GraphQL
   module Searchkick
     class SearchableExtension < GraphQL::Schema::FieldExtension
-      SEARCH_ALL = '*'.freeze
-
       def apply
         field.argument(:query, String, required: false, description: 'A search query')
       end
