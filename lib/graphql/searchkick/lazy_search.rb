@@ -14,13 +14,13 @@ module GraphQL
       def_delegators :execute_search, :total_count, :current_page, :total_pages
       def_delegators :results, :each, :index, :any?, :empty?, :size, :length, :slice, :[], :to_ary
 
-      def initialize(query:, model_class:, **options)
+      def initialize(options, query:, model_class:)
         @query = query
         @model_class = model_class
-        @options = options
+        @options = options || {}
 
-        if options.key?(:limit)
-          @limit_value = options[:limit]
+        if @options.key?(:limit)
+          @limit_value = @options[:limit]
         end
       end
 
