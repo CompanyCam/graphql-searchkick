@@ -17,7 +17,7 @@ module GraphQL
         result = yield(object, next_args)
 
         model = options[:model_class]
-        LazySearch.new(query: query, model_class: model, **result)
+        LazySearch.new(result, query: query, model_class: model)
       end
     end
   end
