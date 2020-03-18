@@ -26,5 +26,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'codeclimate-test-reporter'
   spec.add_development_dependency 'rake',    '~> 12.0'
   spec.add_development_dependency 'rspec',   '~> 3.0'
-  spec.add_dependency 'graphql', '~> 1', '> 1.8'
+  spec.add_development_dependency 'elasticsearch-extensions',   '~> 0.0.31'
+  spec.add_dependency 'graphql', '> 1.8'
+  spec.add_dependency 'searchkick', '> 3.0'
 end
