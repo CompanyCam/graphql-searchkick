@@ -19,7 +19,6 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
       zeitwerk (~> 2.2)
-    ansi (1.5.0)
     appraisal (2.2.0)
       bundler
       rake
@@ -34,13 +33,10 @@ GEM
       elasticsearch-transport (= 7.5.0)
     elasticsearch-api (7.5.0)
       multi_json
-    elasticsearch-extensions (0.0.31)
-      ansi
-      elasticsearch
     elasticsearch-transport (7.5.0)
       faraday (>= 0.14, < 1)
       multi_json
-    faraday (0.15.4)
+    faraday (0.17.3)
       multipart-post (>= 1.2, < 3)
     graphql (1.10.5)
     hashie (3.6.0)
@@ -87,7 +83,6 @@ DEPENDENCIES
   activerecord (~> 6.0)
   appraisal
   codeclimate-test-reporter
-  elasticsearch-extensions (~> 0.0.31)
   graphql-searchkick!
   rake (~> 12.0)
   rspec (~> 3.0)

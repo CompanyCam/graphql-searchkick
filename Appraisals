@@ -11,6 +11,7 @@ appraise "graphql-1.10" do
 end
 
 appraise "searchkick-3.0" do
+  gem 'elasticsearch', '< 6.0'
   gem 'searchkick', '~> 3.0'
 end
 
