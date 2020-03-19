@@ -12,9 +12,10 @@ module GraphQL
 
       attr_reader :query, :model_class, :options, :limit_value, :offset_value
 
-      def_delegators :@result, :results, :hits, :took, :error
-      def_delegators :@result, :total_count, :current_page, :total_pages
-      def_delegators :results, :each, :index, :any?, :empty?, :size, :length, :slice, :[], :to_ary
+      def_delegators :load, :results, :hits, :took, :error
+      def_delegators :load, :total_count, :current_page, :total_pages
+      def_delegators :results, :first, :last, :each, :index
+      def_delegators :results, :any?, :empty?, :size, :length, :slice, :[], :to_ary
 
       def initialize(options, query:, model_class:)
         @query =

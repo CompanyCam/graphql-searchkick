@@ -3,18 +3,26 @@
 require_relative './models'
 require_relative './field'
 
-class ProjectType < GraphQL::Schema::Object
-  field :name, String, null: true
+class BaseObject < GraphQL::Schema::Object
+  field_class Field
 end
 
-class QueryType < GraphQL::Schema::Object
-  field_class Field
+class ProjectType < BaseObject
+  field :id, ID, null: false
+  field :name, String, null: true
+  field :createdAt, GraphQL::Types::ISO8601DateTime, null: false
+  field :updatedAt, GraphQL::Types::ISO8601DateTime, null: false
+end
 
+class QueryType < BaseObject
   field :constant, String, null: false
-  field :projects, ProjectType.connection_type, null: true, search: Project
+  field :projects, ProjectType.connection_type, null: true, search: Project, max_page_size: 100
 
   def constant
     'Testing Query'
+  end
+
+  def projects
   end
 end
 
