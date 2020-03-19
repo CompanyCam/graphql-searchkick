@@ -52,16 +52,16 @@ RSpec.describe GraphQL::Searchkick::LazySearch do
     end
   end
 
-  describe '#execute_search' do
+  describe '#load' do
     it 'calls #search on the model_class' do
       expect(model_class).to receive(:search).with(query, { limit: nil, offset: nil })
-      subject.execute_search
+      subject.load
     end
 
     it 'caches the result' do
       expect(model_class).to receive(:search).with(query, { limit: nil, offset: nil }).once
-      subject.execute_search
-      subject.execute_search
+      subject.load
+      subject.load
     end
   end
 end
