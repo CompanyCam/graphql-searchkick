@@ -10,20 +10,18 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
     steps:
-    - name: Install Java
-      run: |
-        sudo apt install -y openjdk-8-jdk
+    - name: Setup ElasticSearch
+      uses: getong/elasticsearch-action@v1
+      with:
+        # Version of elasticsearch to use
+        elasticsearch version: 7.6.1
     - name: Install sqlite3
       run: |
         sudo apt-get install -y libsqlite3-dev
-    - name: Setup ElasticSearch
-      env:
-        ELASTICSEARCH_PORT: 9200
-        ELASTICSEARCH_VERSION: 6.8.7
+    - name: Wait for Elasticsearch
       run: |
-        curl -sSL https://raw.githubusercontent.com/codeship/scripts/master/packages/elasticsearch.sh | bash -s
+        for i in {1..12}; do wget -O- -v http://127.0.0.1:9200/ && break || sleep 5; done
     - uses: actions/checkout@v2
     - name: Set up Ruby 2.6
       uses: actions/setup-ruby@v1
