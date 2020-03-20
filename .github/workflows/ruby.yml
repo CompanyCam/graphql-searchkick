@@ -16,9 +16,11 @@ jobs:
       run: |
         sudo apt-get install libsqlite3-dev
     - name: Setup ElasticSearch
-      uses: CompanyCam/elasticsearch-action@master
-      with:
-        version: '6.8.7'
+      env:
+        ELASTICSEARCH_PORT: 9200
+        ELASTICSEARCH_VERSION: 6.8.7
+      run: |
+        \curl -sSL https://raw.githubusercontent.com/codeship/scripts/master/packages/elasticsearch.sh | bash -s
     - uses: actions/checkout@v2
     - name: Set up Ruby 2.6
       uses: actions/setup-ruby@v1
@@ -26,7 +28,7 @@ jobs:
         ruby-version: 2.6.x
     - name: Check networks
       run: |
-        docker network ls
+        lsof -i :9200
     - name: Build and test with Rake
       env:
         ELASTICSEARCH_URL: 'http://localhost:9200'
