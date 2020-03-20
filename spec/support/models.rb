@@ -14,7 +14,7 @@ ActiveRecord::Migration.create_table :projects do |t|
 end
 
 class Project < ActiveRecord::Base
-  searchkick _all: false, default_fields: [:name]
+  searchkick
 
   def search_data
     {
