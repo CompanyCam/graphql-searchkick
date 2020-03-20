@@ -18,7 +18,7 @@ jobs:
     - name: Setup ElasticSearch
       uses: getong/elasticsearch-action@v1
       with:
-        port: 9200
+        elasticsearch version: '6.8.7'
     - uses: actions/checkout@v2
     - name: Set up Ruby 2.6
       uses: actions/setup-ruby@v1
