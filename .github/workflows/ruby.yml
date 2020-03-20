@@ -15,16 +15,8 @@ jobs:
     - name: Install sqlite3
       run: |
         sudo apt-get install libsqlite3-dev
-    - name: Install elasticsearch
-      run: |
-        wget -O elasticsearch-7.6.0.tar.gz https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.6.0-linux-x86_64.tar.gz
-        tar xvfz elasticsearch-7.6.0.tar.gz
-        mkdir -p $HOME/elasticsearch/7.6.0
-        mv elasticsearch-7.6.0 $HOME/elasticsearch/7.6.0
-        cd $HOME/elasticsearch/7.6.0 
-        ls -l
-        bin/elasticsearch -d
-        for i in {1..12}; do wget -O- -v http://127.0.0.1:9200/ && break || sleep 5; done
+    - name: Setup ElasticSearch
+      uses: getong/elasticsearch-action@v1
     - uses: actions/checkout@v2
     - name: Set up Ruby 2.6
       uses: actions/setup-ruby@v1
