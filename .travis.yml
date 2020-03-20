@@ -2,16 +2,19 @@
 dist: bionic
 language: ruby
 gemfile:
-  - Gemfile
+  - gemfiles/graphql_1.8.gemfile
+  - gemfiles/graphql_1.9.gemfile
+  - gemfiles/graphql_1.10.gemfile
+  - gemfiles/searchkick_3.0.gemfile
+  - gemfiles/searchkick_4.0.gemfile
 cache: bundler
 rvm:
   - 2.5.7
-script: bundle exec appraisal rake spec
+script: bundle exec rake spec
 before_install:
   - gem install bundler -v 2.1.4
   - sudo apt-get install libsqlite3-dev
   - bundle install
-  - bundle exec appraisal install
   - ./spec/ci/install_elasticsearch.sh
 cache:
   directories:
