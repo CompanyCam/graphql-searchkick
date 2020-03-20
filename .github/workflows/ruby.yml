@@ -26,7 +26,7 @@ jobs:
         ruby-version: 2.6.x
     - name: Build and test with Rake
       env:
-        ELASTICSEARCH_URL: 'http://127.0.0.1:9200'
+        ELASTICSEARCH_URL: 'http://elastic:changeme@localhost:9200'
       run: |
         gem install bundler
         bundle install
