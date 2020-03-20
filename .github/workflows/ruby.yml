@@ -17,6 +17,8 @@ jobs:
         sudo apt-get install libsqlite3-dev
     - name: Setup ElasticSearch
       uses: getong/elasticsearch-action@v1
+      with:
+        port: 9200
     - uses: actions/checkout@v2
     - name: Set up Ruby 2.6
       uses: actions/setup-ruby@v1
