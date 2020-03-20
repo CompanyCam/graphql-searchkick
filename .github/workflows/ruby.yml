@@ -26,5 +26,6 @@ jobs:
     - name: Build and test with Rake
       run: |
         gem install bundler
+        bundle install
         bundle exec appraisal install
         bundle exec appraisal rake spec
