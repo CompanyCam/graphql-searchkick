@@ -37,7 +37,7 @@ Or install it yourself as:
 
 Include the field integration into your field class.
 
-```
+```ruby
 class BaseField < GraphQL::Schema::Field
   include GraphQL::Searchkick::FieldIntegration
 end
@@ -47,7 +47,7 @@ end
 
 Add `search: ModelClass` to any connection field that you want to allow querying.
 
-```
+```ruby
 field :projects, Types::ProjectType.connection_type, null: false, search: Project
 ```
 
@@ -59,7 +59,7 @@ If `query` is `nil?` or `empty?` the default value `'*'` is used.
 
 If you would like to pass options to the `search` method, override the resolver for the field that returns a `Hash`.
 
-```
+```ruby
 def projects(arguments)
   {
     where: {
@@ -75,7 +75,7 @@ end
 
 This will translate into:
 
-```
+```ruby
 Project.search('*', where: { active: true, coordinates: { near: { lat: 40.815110, lon: -96.709523 }, within: '1km' } })
 ```
 
