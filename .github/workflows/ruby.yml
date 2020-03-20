@@ -12,9 +12,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Install Java
+      run: |
+        sudo apt install -y openjdk-8-jdk
     - name: Install sqlite3
       run: |
-        sudo apt-get install libsqlite3-dev
+        sudo apt-get install -y libsqlite3-dev
     - name: Setup ElasticSearch
       env:
         ELASTICSEARCH_PORT: 9200
