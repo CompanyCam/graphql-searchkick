@@ -1,7 +1,7 @@
 require 'bundler/setup'
 require 'graphql/searchkick'
 
-ENV['ELASTICSEARCH_URL'] = 'http://localhost:9200'
+ENV['ELASTICSEARCH_URL'] = 'http://localhost:9200' if ENV['ELASTICSEARCH_URL'].nil?
 
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 
