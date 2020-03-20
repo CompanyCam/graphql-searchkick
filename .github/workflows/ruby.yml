@@ -19,6 +19,7 @@ jobs:
       run: |
         wget -O elasticsearch-7.6.0.tar.gz https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.6.0-linux-x86_64.tar.gz
         tar xvfz elasticsearch-7.6.0.tar.gz
+        mkdir -p $HOME/elasticsearch/7.6.0
         mv elasticsearch-7.6.0 $HOME/elasticsearch/7.6.0
         cd $HOME/elasticsearch/7.6.0
         bin/elasticsearch -d
