@@ -21,8 +21,7 @@ jobs:
         tar xvfz elasticsearch-7.6.0.tar.gz
         mkdir -p $HOME/elasticsearch/7.6.0
         mv elasticsearch-7.6.0 $HOME/elasticsearch/7.6.0
-        cd $HOME/elasticsearch/7.6.0
-        ./bin/elasticsearch -d
+        cd $HOME/elasticsearch/7.6.0 && bin/elasticsearch -d
         for i in {1..12}; do wget -O- -v http://127.0.0.1:9200/ && break || sleep 5; done
     - uses: actions/checkout@v2
     - name: Set up Ruby 2.6
