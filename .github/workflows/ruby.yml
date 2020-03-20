@@ -32,7 +32,7 @@ jobs:
         ruby-version: 2.6.x
     - name: Build and test with Rake
       env:
-        ELASTICSEARCH_URL: 'https://elastic:password@localhost:9200'
+        ELASTICSEARCH_URL: 'https://elastic:password@localhost:9300'
       run: |
         gem install bundler
         bundle install
