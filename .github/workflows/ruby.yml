@@ -23,9 +23,7 @@ jobs:
         ELASTICSEARCH_PORT: 9200
         ELASTICSEARCH_VERSION: 6.8.7
       run: |
-        jdk_switcher home oraclejdk8
-        jdk_switcher use oraclejdk8
-        \curl -sSL https://raw.githubusercontent.com/codeship/scripts/master/packages/elasticsearch.sh | bash -s
+        curl -sSL https://raw.githubusercontent.com/codeship/scripts/master/packages/elasticsearch.sh | bash -s
     - uses: actions/checkout@v2
     - name: Set up Ruby 2.6
       uses: actions/setup-ruby@v1
