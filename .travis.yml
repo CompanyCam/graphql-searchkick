@@ -1,6 +1,18 @@
 ---
+dist: bionic
 language: ruby
+gemfile:
+  - Gemfile
 cache: bundler
 rvm:
   - 2.5.7
-before_install: gem install bundler -v 2.1.4
+script: bundle exec appraisal rake spec
+before_install:
+  - gem install bundler -v 2.1.4
+  - sudo apt-get install libsqlite3-dev
+  - ./spec/ci/install_elasticsearch.sh
+cache:
+  directories:
+    - $HOME/elasticsearch
+env:
+  - ELASTICSEARCH_VERSION=7.6.1
