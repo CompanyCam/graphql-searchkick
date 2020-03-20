@@ -16,7 +16,7 @@ jobs:
       run: |
         sudo apt-get install libsqlite3-dev
     - name: Setup ElasticSearch
-      uses: CompanyCam/elasticsearch-action@v1
+      uses: CompanyCam/elasticsearch-action@master
       with:
         version: '6.8.7'
     - uses: actions/checkout@v2
