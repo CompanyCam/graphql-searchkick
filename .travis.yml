@@ -20,4 +20,4 @@ cache:
   directories:
     - $HOME/elasticsearch
 env:
-  - ELASTICSEARCH_VERSION=7.6.1
+  - ELASTICSEARCH_VERSION=6.8.7
