@@ -1,0 +1,30 @@
+name: Ruby
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: getong/elasticsearch-action@v1
+      with:
+        elasticsearch version: '7.5.1'
+        host port: 9200
+        container port: 9200
+        discovery type: 'single-node'
+    - uses: actions/checkout@v2
+    - name: Set up Ruby 2.6
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: 2.6.x
+    - name: Build and test with Rake
+      run: |
+        gem install bundler
+        bundle exec appraisal install
+        bundle exec appraisal rake spec
