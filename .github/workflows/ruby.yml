@@ -15,12 +15,9 @@ jobs:
     - name: Install sqlite3
       run: |
         sudo apt-get install libsqlite3-dev
-    - uses: getong/elasticsearch-action@v1
+    - uses: elastic/elastic-github-actions/elasticsearch#0041cb4
       with:
-        elasticsearch version: '7.5.1'
-        host port: 9200
-        container port: 9200
-        discovery type: 'single-node'
+        stack-version: '7.5.1'
     - uses: actions/checkout@v2
     - name: Set up Ruby 2.6
       uses: actions/setup-ruby@v1
