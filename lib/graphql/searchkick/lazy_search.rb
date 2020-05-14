@@ -10,7 +10,7 @@ module GraphQL
 
       SEARCH_ALL = '*'.freeze
 
-      attr_reader :query, :model_class, :options, :limit_value, :offset_value
+      attr_accessor :query, :model_class, :options, :limit_value, :offset_value
 
       def_delegators :load, :results, :hits, :took, :error
       def_delegators :load, :total_count, :current_page, :total_pages
@@ -28,7 +28,7 @@ module GraphQL
         @options = options || {}
 
         if @options.key?(:limit)
-          @limit_value = @options[:limit]
+          self.limit_value = @options[:limit]
         end
       end
 
@@ -40,12 +40,22 @@ module GraphQL
         @result
       end
 
-      def limit=(val)
-        @limit_value = val
+      def limit(value)
+        clone.limit!(value)
       end
 
-      def offset=(val)
-        @offset_value = val
+      def offset(value)
+        clone.offset!(value)
+      end
+
+      def limit!(value)
+        self.limit_value = value
+        self
+      end
+
+      def offset!(value)
+        self.offset_value = value
+        self
       end
     end
   end

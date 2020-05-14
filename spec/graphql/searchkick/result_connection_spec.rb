@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 RSpec.describe GraphQL::Searchkick::ResultConnection, search: true do
+  before(:each) do
+    SearchkickSchema.use(GraphQL::Pagination::Connections)
+    SearchkickSchema.connections.add(GraphQL::Searchkick::LazySearch, GraphQL::Searchkick::ResultConnection)
+  end
   let(:query_string) do
     <<-GQL
       query getProjects(
@@ -168,6 +172,7 @@ RSpec.describe GraphQL::Searchkick::ResultConnection, search: true do
 
         describe 'after' do
           let(:first) { 10 }
+
           describe 'is within bounds' do
             let(:after) { encode_cursor(5) }
 

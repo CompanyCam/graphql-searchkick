@@ -9,6 +9,11 @@ module GraphQLHelper
     result.as_json.with_indifferent_access
   end
 
+  def decode_cursor(cursor)
+    encoder = SearchkickSchema.cursor_encoder || GraphQL::Schema::Base64Encoder
+    encoder.decode(cursor.to_s, nonce: true)
+  end
+
   def encode_cursor(cursor)
     encoder = SearchkickSchema.cursor_encoder || GraphQL::Schema::Base64Encoder
     encoder.encode(cursor.to_s, nonce: true)
