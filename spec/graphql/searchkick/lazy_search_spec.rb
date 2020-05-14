@@ -41,15 +41,13 @@ RSpec.describe GraphQL::Searchkick::LazySearch do
 
   describe 'limit setter' do
     it 'sets the limit_value' do
-      search_instance.limit(200)
-      expect(search_instance.limit_value).to eq(200)
+      expect(search_instance.limit(200).limit_value).to eq(200)
     end
   end
 
   describe 'offset setter' do
     it 'sets the offset_value' do
-      search_instance.offset(200)
-      expect(search_instance.offset_value).to eq(200)
+      expect(search_instance.offset(200).offset_value).to eq(200)
     end
   end
 
