@@ -130,17 +130,17 @@ module GraphQL
 
         def set_offset(relation, offset)
           if offset >= 0
-            relation.offset = offset
+            relation.offset(offset)
           else
-            relation.offset = 0
+            relation.offset(0)
           end
         end
 
         def set_limit(relation, limit)
           if limit >= 0
-            relation.limit = limit
+            relation.limit(limit)
           else
-            relation.limit = 0
+            relation.limit(0)
           end
         end
 

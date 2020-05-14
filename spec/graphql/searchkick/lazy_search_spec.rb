@@ -38,16 +38,22 @@ RSpec.describe GraphQL::Searchkick::LazySearch do
     end
   end
 
-  describe '#limit=' do
+  describe 'clone' do
+    it 'copies all relevant instance variables' do
+      subject.limit(10)
+    end
+  end
+
+  describe 'limit setter' do
     it 'sets the limit_value' do
-      subject.limit = 200
+      subject.limit(200)
       expect(subject.limit_value).to eq(200)
     end
   end
 
-  describe '#offset=' do
-    it 'sets the limit_value' do
-      subject.offset = 200
+  describe 'offset setter' do
+    it 'sets the offset_value' do
+      subject.offset(200)
       expect(subject.offset_value).to eq(200)
     end
   end

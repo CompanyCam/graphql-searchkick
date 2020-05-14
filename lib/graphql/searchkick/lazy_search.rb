@@ -10,7 +10,7 @@ module GraphQL
 
       SEARCH_ALL = '*'.freeze
 
-      attr_reader :query, :model_class, :options, :limit_value, :offset_value
+      attr_reader :query, :model_class, :options, :values
 
       def_delegators :load, :results, :hits, :took, :error
       def_delegators :load, :total_count, :current_page, :total_pages
@@ -18,6 +18,8 @@ module GraphQL
       def_delegators :results, :any?, :empty?, :size, :length, :slice, :[], :to_ary
 
       def initialize(options, query:, model_class:)
+        @values = {}
+
         @query =
           if query.nil? || query.empty?
             SEARCH_ALL
@@ -28,7 +30,7 @@ module GraphQL
         @options = options || {}
 
         if @options.key?(:limit)
-          @limit_value = @options[:limit]
+          self.limit_value = @options[:limit]
         end
       end
 
@@ -40,12 +42,46 @@ module GraphQL
         @result
       end
 
-      def limit=(val)
-        @limit_value = val
+      def limit(value)
+        clone.limit!(value)
       end
 
-      def offset=(val)
-        @offset_value = val
+      def offset(value)
+        clone.offset!(value)
+      end
+
+      def limit!(value)
+        self.limit_value = value
+        self
+      end
+
+      def offset!(value)
+        self.offset_value = value
+        self
+      end
+
+      def limit_value=(value)
+        set_value(:limit, value)
+      end
+
+      def limit_value
+        get_value(:limit)
+      end
+
+      def offset_value=(value)
+        set_value(:offset, value)
+      end
+
+      def offset_value
+        get_value(:offset)
+      end
+
+      def set_value(name, value)
+        @values[name] = value
+      end
+
+      def get_value(name)
+        @values[name]
       end
     end
   end
