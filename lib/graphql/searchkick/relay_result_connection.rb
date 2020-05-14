@@ -71,41 +71,42 @@ module GraphQL
       private
 
         def apply_pagination
+          relation = nodes
           if after
-            offset = (search_offset(nodes) || 0) + offset_from_cursor(after)
-            set_offset(nodes, offset)
+            offset = (search_offset(relation) || 0) + offset_from_cursor(after)
+            relation = set_offset(relation, offset)
           end
 
           if before && after
             if offset_from_cursor(after) < offset_from_cursor(before)
               limit = offset_from_cursor(before) - offset_from_cursor(after) - 1
-              set_limit(nodes, limit)
+              relation = set_limit(relation, limit)
             else
-              set_limit(nodes, 0)
+              relation = set_limit(relation, 0)
             end
           elsif before
-            set_limit(nodes, offset_from_cursor(before) - 1)
+            relation = set_limit(relation, offset_from_cursor(before) - 1)
           end
 
           if first
-            if search_limit(nodes).nil? || search_limit(nodes) > first
-              set_limit(nodes, first)
+            if search_limit(relation).nil? || search_limit(relation) > first
+              relation = set_limit(relation, first)
             end
           end
 
           if last
-            if search_limit(nodes)
-              if last <= search_limit(nodes)
-                offset = (search_offset(nodes) || 0) + (search_limit(nodes) - last)
-                set_offset(nodes, offset)
-                set_limit(nodes, last)
+            if search_limit(relation)
+              if last <= search_limit(relation)
+                offset = (search_offset(relation) || 0) + (search_limit(relation) - last)
+                relation = set_offset(relation, offset)
+                relation = set_limit(relation, last)
               end
             end
           end
 
           if max_page_size && !first && !last
-            if search_limit(nodes).nil? || search_limit(nodes) > max_page_size
-              set_limit(nodes, max_page_size)
+            if search_limit(relation).nil? || search_limit(relation) > max_page_size
+              relation = set_limit(relation, max_page_size)
             end
           end
         end
@@ -120,12 +121,12 @@ module GraphQL
           search_results
         end
 
-        def search_limit(lazy_search)
-          lazy_search.limit_value
+        def search_limit(relation)
+          relation.limit_value
         end
 
-        def search_offset(lazy_search)
-          lazy_search.offset_value
+        def search_offset(relation)
+          relation.offset_value
         end
 
         def set_offset(relation, offset)

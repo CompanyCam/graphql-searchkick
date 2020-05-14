@@ -4,14 +4,14 @@ RSpec.describe GraphQL::Searchkick::LazySearch do
   let(:query) { 'Test' }
   let(:model_class) { double('model').as_null_object }
   let(:options) { nil }
-  subject { described_class.new(options, query: query, model_class: model_class) }
+  let(:search_instance) { described_class.new(options, query: query, model_class: model_class) }
 
   describe '#initialize' do
     context 'nil query' do
       let(:query) { nil }
 
       it 'sets query to "*" if query is nil' do
-        expect(subject.query).to eq(GraphQL::Searchkick::LazySearch::SEARCH_ALL)
+        expect(search_instance.query).to eq(GraphQL::Searchkick::LazySearch::SEARCH_ALL)
       end
     end
 
@@ -19,55 +19,50 @@ RSpec.describe GraphQL::Searchkick::LazySearch do
       let(:query) { '' }
 
       it 'sets query to "*" if query is empty string' do
-        expect(subject.query).to eq(GraphQL::Searchkick::LazySearch::SEARCH_ALL)
+        expect(search_instance.query).to eq(GraphQL::Searchkick::LazySearch::SEARCH_ALL)
       end
     end
 
     context 'nil options' do
       let(:options) { nil }
       it 'sets the options to an empty hash' do
-        expect(subject.options).to eq({})
+        expect(search_instance.options).to eq({})
       end
     end
 
     context 'options has limit' do
       let(:options) { { limit: 10 } }
-      it 'sets the limit value' do
-        expect(subject.limit_value).to eq(10)
-      end
-    end
-  end
 
-  describe 'clone' do
-    it 'copies all relevant instance variables' do
-      subject.limit(10)
+      it 'sets the limit value' do
+        expect(search_instance.limit_value).to eq(10)
+      end
     end
   end
 
   describe 'limit setter' do
     it 'sets the limit_value' do
-      subject.limit(200)
-      expect(subject.limit_value).to eq(200)
+      search_instance.limit(200)
+      expect(search_instance.limit_value).to eq(200)
     end
   end
 
   describe 'offset setter' do
     it 'sets the offset_value' do
-      subject.offset(200)
-      expect(subject.offset_value).to eq(200)
+      search_instance.offset(200)
+      expect(search_instance.offset_value).to eq(200)
     end
   end
 
   describe '#load' do
     it 'calls #search on the model_class' do
       expect(model_class).to receive(:search).with(query, { limit: nil, offset: nil })
-      subject.load
+      search_instance.load
     end
 
     it 'caches the result' do
       expect(model_class).to receive(:search).with(query, { limit: nil, offset: nil }).once
-      subject.load
-      subject.load
+      search_instance.load
+      search_instance.load
     end
   end
 end
