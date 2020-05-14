@@ -4,7 +4,7 @@ require 'graphql'
 
 module GraphQL
   module Searchkick
-    class ResultConnection < GraphQL::Relay::BaseConnection
+    class RelayResultConnection < GraphQL::Relay::BaseConnection
 
       def search_results
         return @results if defined? @results
@@ -149,6 +149,6 @@ module GraphQL
         end
     end
 
-    GraphQL::Relay::BaseConnection.register_connection_implementation(LazySearch, ResultConnection)
+    GraphQL::Relay::BaseConnection.register_connection_implementation(LazySearch, RelayResultConnection)
   end
 end

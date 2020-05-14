@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe GraphQL::Searchkick::ResultConnection, search: true do
+RSpec.describe GraphQL::Searchkick::RelayResultConnection, search: true do
   let(:query_string) do
     <<-GQL
       query getProjects(

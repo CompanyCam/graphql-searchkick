@@ -4,7 +4,7 @@ require 'graphql/searchkick/version'
 require 'graphql/searchkick/searchable_extension'
 require 'graphql/searchkick/field_integration'
 require 'graphql/searchkick/lazy_search'
-require 'graphql/searchkick/result_connection'
+require 'graphql/searchkick/relay_result_connection'
 
 
 module Graphql
