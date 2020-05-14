@@ -24,6 +24,8 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency 'appraisal'
   spec.add_development_dependency 'codeclimate-test-reporter'
+  spec.add_development_dependency 'guard'
+  spec.add_development_dependency 'guard-rspec'
   spec.add_development_dependency 'rake',    '~> 12.0'
   spec.add_development_dependency 'rspec',   '~> 3.0'
   spec.add_development_dependency 'activerecord', '~> 6.0'
