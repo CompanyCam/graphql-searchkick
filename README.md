@@ -8,7 +8,7 @@ Integrate Searchkick with GraphQL Connections easily.
 
 ## Note
 
-The current version of the gem only works with `GraphQL::Relay::BaseConnection` and descendants. If you need support for `GraphQL::Pagination::Connection` feel free to open an issue or create a PR.
+The current version of the gem only works with `GraphQL::Pagination::Connection` . If you need support for the older `GraphQL::Relay::BaseConnection` version use v0.1.0.
 
 ## Considerations & Limits
 
@@ -40,6 +40,15 @@ Include the field integration into your field class.
 ```ruby
 class BaseField < GraphQL::Schema::Field
   include GraphQL::Searchkick::FieldIntegration
+end
+```
+
+Add the connection to your schema.
+
+```ruby
+class Schema < GraphQL::Schema
+  use GraphQL::Pagination::Connections
+  connections.add(GraphQL::Searchkick::LazySearch, GraphQL::Searchkick::ResultConnection)
 end
 ```
 
