@@ -14,8 +14,12 @@ module GraphQL
         query = next_args.delete(:query)
         result = yield(object, next_args)
 
-        model = options[:model_class]
-        LazySearch.new(result, query: query, model_class: model)
+        if defined?(ActiveRecord::Relation) && result.is_a?(ActiveRecord::Relation)
+          result
+        else
+          model = options[:model_class]
+          LazySearch.new(result, query: query, model_class: model)
+        end
       end
     end
   end

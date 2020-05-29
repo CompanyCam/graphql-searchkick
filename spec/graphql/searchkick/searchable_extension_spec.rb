@@ -29,7 +29,6 @@ RSpec.describe GraphQL::Searchkick::SearchableExtension do
       }
     end
     let(:filters) { { where: { name: 'Banana' } } }
-    let(:handler) { proc {|obj, args| filters } }
 
     it 'removes `query` from the arguments' do
       expect { |block|
@@ -37,14 +36,28 @@ RSpec.describe GraphQL::Searchkick::SearchableExtension do
       }.to yield_with_args(object, { test: true })
     end
 
-    it 'returns a LazySearch' do
-      result = subject.resolve(object: object, arguments: arguments, context: {}, &handler)
-      expect(result).to be_a(GraphQL::Searchkick::LazySearch)
+    context 'not a relation object' do
+      let(:handler) { proc {|obj, args| filters } }
+
+      it 'returns a LazySearch' do
+        result = subject.resolve(object: object, arguments: arguments, context: {}, &handler)
+        expect(result).to be_a(GraphQL::Searchkick::LazySearch)
+      end
+
+      it 'passes the options, query, and model_class to LazySearch' do
+        expect(GraphQL::Searchkick::LazySearch).to receive(:new).with(filters, query: 'Test', model_class: Project)
+        subject.resolve(object: object, arguments: arguments, context: {}, &handler)
+      end
     end
 
-    it 'passes the options, query, and model_class to LazySearch' do
-      expect(GraphQL::Searchkick::LazySearch).to receive(:new).with(filters, query: 'Test', model_class: Project)
-      subject.resolve(object: object, arguments: arguments, context: {}, &handler)
+    context 'ActiveRecord::Relation' do
+      let(:handler) { proc {|obj, args| Project.all } }
+
+      it 'returns the relation object' do
+        result = subject.resolve(object: object, arguments: arguments, context: {}, &handler)
+        expect(result).to be_a(ActiveRecord::Relation)
+      end
     end
+
   end
 end
