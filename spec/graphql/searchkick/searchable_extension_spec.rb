@@ -30,10 +30,10 @@ RSpec.describe GraphQL::Searchkick::SearchableExtension do
     end
     let(:filters) { { where: { name: 'Banana' } } }
 
-    it 'removes `query` from the arguments' do
+    it 'includes `query` from the arguments' do
       expect { |block|
         subject.resolve(object: object, arguments: arguments, context: {}, &block)
-      }.to yield_with_args(object, { test: true })
+      }.to yield_with_args(object, { query: 'Test', test: true })
     end
 
     context 'not a relation object' do
