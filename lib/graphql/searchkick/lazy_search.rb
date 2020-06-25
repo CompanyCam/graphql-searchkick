@@ -8,7 +8,7 @@ module GraphQL
       include Enumerable
       extend Forwardable
 
-      SEARCH_ALL = '*'.freeze
+      SEARCH_ALL = '*'
 
       attr_accessor :query, :model_class, :options, :limit_value, :offset_value
 
@@ -27,9 +27,8 @@ module GraphQL
         @model_class = model_class
         @options = options || {}
 
-        if @options.key?(:limit)
-          self.limit_value = @options[:limit]
-        end
+        self.limit_value = @options[:limit] if @options.key?(:limit)
+        self.offset_value = @options[:offset] if @options.key?(:offset)
       end
 
       def load
