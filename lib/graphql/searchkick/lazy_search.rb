@@ -8,7 +8,7 @@ module GraphQL
       include Enumerable
       extend Forwardable
 
-      SEARCH_ALL = '*'
+      SEARCH_ALL = '*'.freeze
 
       attr_accessor :query, :model_class, :options, :limit_value, :offset_value
 
