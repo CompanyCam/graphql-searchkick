@@ -37,6 +37,14 @@ RSpec.describe GraphQL::Searchkick::LazySearch do
         expect(search_instance.limit_value).to eq(10)
       end
     end
+
+    context 'options has offset' do
+      let(:options) { { offset: 2 } }
+
+      it 'sets the limit value' do
+        expect(search_instance.offset_value).to eq(2)
+      end
+    end
   end
 
   describe 'limit setter' do
