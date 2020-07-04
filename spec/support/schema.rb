@@ -12,6 +12,9 @@ class ProjectType < BaseObject
   field :name, String, null: true
   field :createdAt, GraphQL::Types::ISO8601DateTime, null: false
   field :updatedAt, GraphQL::Types::ISO8601DateTime, null: false
+
+  def createdAt
+  end
 end
 
 class QueryType < BaseObject
