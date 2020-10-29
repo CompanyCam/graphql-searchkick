@@ -12,3 +12,4 @@ module Graphql
     class Error < StandardError; end
   end
 end
+# teste
