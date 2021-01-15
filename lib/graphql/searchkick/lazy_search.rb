@@ -10,14 +10,14 @@ module GraphQL
 
       SEARCH_ALL = '*'.freeze
 
-      attr_accessor :query, :model_class, :options, :limit_value, :offset_value
+      attr_accessor :query, :model_class, :options, :limit_value, :offset_value, :elastic_sintaxe
 
       def_delegators :load, :results, :hits, :took, :error
       def_delegators :load, :total_count, :current_page, :total_pages, :aggs
       def_delegators :results, :first, :last, :each, :index
       def_delegators :results, :any?, :empty?, :size, :length, :slice, :[], :to_ary
 
-      def initialize(options, query:, model_class:)
+      def initialize(options, query:, model_class:, elastic_sintaxe: false)
         @query =
           if query.nil? || query.empty?
             SEARCH_ALL
@@ -26,6 +26,7 @@ module GraphQL
           end
         @model_class = model_class
         @options = options || {}
+        @elastic_sintaxe = elastic_sintaxe
 
         self.limit_value = @options[:limit] if @options.key?(:limit)
         self.offset_value = @options[:offset] if @options.key?(:offset)
@@ -34,9 +35,13 @@ module GraphQL
       def load
         return @result if defined? @result
 
-        @result = model_class.search(query, options.merge(limit: limit_value, offset: offset_value))
+        @result = model_class.search(query, body_options)
+      end
 
-        @result
+      def body_options
+        return { body: options} if elastic_sintaxe
+
+        options.merge(limit: limit_value, offset: offset_value)
       end
 
       def limit(value)
