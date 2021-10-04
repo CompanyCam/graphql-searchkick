@@ -35,13 +35,9 @@ module GraphQL
       def load
         return @result if defined? @result
 
-        @result = model_class.search(query, body_options)
-      end
+        return model_class.search(body: options, load: false ) if elastic_sintaxe
 
-      def body_options
-        return { body: options} if elastic_sintaxe
-
-        options.merge(limit: limit_value, offset: offset_value)
+        model_class.search(query, options.merge(limit: limit_value, offset: offset_value))
       end
 
       def limit(value)
