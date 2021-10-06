@@ -35,7 +35,7 @@ module GraphQL
       def load
         return @result if defined? @result
 
-        return model_class.search(body: options, load: false ) if elastic_sintaxe
+        return model_class.search(body: options.except(:load), load: option_load) if elastic_sintaxe
 
         model_class.search(query, options.merge(limit: limit_value, offset: offset_value))
       end
@@ -56,6 +56,14 @@ module GraphQL
       def offset!(value)
         self.offset_value = value
         self
+      end
+
+      private
+
+      def option_load
+        return false unless options[:load].present?
+
+        options[:load]
       end
     end
   end
