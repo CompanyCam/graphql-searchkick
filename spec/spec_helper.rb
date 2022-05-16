@@ -1,5 +1,6 @@
 require 'bundler/setup'
 require 'graphql/searchkick'
+require 'elasticsearch'
 
 ENV['ELASTICSEARCH_URL'] = 'http://localhost:9200'
 
