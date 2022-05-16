@@ -2,7 +2,6 @@
 
 RSpec.describe GraphQL::Searchkick::ResultConnection, search: true do
   before(:each) do
-    SearchkickSchema.use(GraphQL::Pagination::Connections)
     SearchkickSchema.connections.add(GraphQL::Searchkick::LazySearch, GraphQL::Searchkick::ResultConnection)
   end
   let(:query_string) do

@@ -2,7 +2,6 @@
 
 source "https://rubygems.org"
 
-gem "elasticsearch", "< 6.0"
-gem "searchkick", "~> 3.0"
+gem "graphql", "~> 1.11"
 
 gemspec path: "../"
