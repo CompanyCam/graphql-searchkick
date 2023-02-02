@@ -3,7 +3,7 @@
 RSpec.describe GraphQL::Searchkick::LazySearch do
   let(:query) { 'Test' }
   let(:model_class) { double('model').as_null_object }
-  let(:options) { nil }
+  let(:options) { { limit: 10 } }
   let(:search_instance) { described_class.new(options, query: query, model_class: model_class) }
 
   describe '#initialize' do
@@ -31,8 +31,6 @@ RSpec.describe GraphQL::Searchkick::LazySearch do
     end
 
     context 'options has limit' do
-      let(:options) { { limit: 10 } }
-
       it 'sets the limit value' do
         expect(search_instance.limit_value).to eq(10)
       end
@@ -53,12 +51,12 @@ RSpec.describe GraphQL::Searchkick::LazySearch do
 
   describe '#load' do
     it 'calls #search on the model_class' do
-      expect(model_class).to receive(:search).with(query, { limit: nil, offset: nil })
+      expect(model_class).to receive(:search).with(query, { limit: 10, offset: nil })
       search_instance.load
     end
 
     it 'caches the result' do
-      expect(model_class).to receive(:search).with(query, { limit: nil, offset: nil }).once
+      expect(model_class).to receive(:search).with(query, { limit: 10, offset: nil }).once
       search_instance.load
       search_instance.load
     end
