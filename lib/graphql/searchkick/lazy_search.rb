@@ -35,7 +35,7 @@ module GraphQL
       def load
         return @result if defined? @result
 
-        @result = model_class.search(query, options.merge(limit: limit_value, offset: offset_value))
+        @result = model_class.search(query, **options.merge(limit: limit_value, offset: offset_value))
 
         @result
       end
