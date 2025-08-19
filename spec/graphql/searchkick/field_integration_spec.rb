@@ -10,7 +10,7 @@ RSpec.describe GraphQL::Searchkick::FieldIntegration do
         null: true
       }
     end
-    let(:field) { Field.new(field_config) }
+    let(:field) { Field.new(**field_config) }
 
     describe 'is nil' do
       let(:search) { nil }

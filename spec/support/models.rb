@@ -5,7 +5,7 @@ require 'searchkick'
 
 ActiveRecord::Base.logger = $logger
 
-ActiveRecord::Base.default_timezone = :utc
+ActiveRecord.default_timezone = :utc
 ActiveRecord::Base.establish_connection adapter: "sqlite3", database: ":memory:"
 
 ActiveRecord::Migration.create_table :projects do |t|

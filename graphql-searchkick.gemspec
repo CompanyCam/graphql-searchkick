@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.description   = "A Searchkick plugin for graphql-ruby allowing you to use searchkick with the connection type"
   spec.homepage      = "https://github.com/CompanyCam/graphql-searchkick"
   spec.license       = "MIT"
-  spec.required_ruby_version = Gem::Requirement.new(">= 2.6.0")
+  spec.required_ruby_version = Gem::Requirement.new(">= 3.0.0")
 
   spec.metadata['homepage_uri'] = spec.homepage
   spec.metadata['changelog_uri'] = "#{spec.homepage}/blob/master/CHANGELOG.md"
@@ -29,7 +29,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'guard-rspec'
   spec.add_development_dependency 'rake',    '~> 12.0'
   spec.add_development_dependency 'rspec',   '~> 3.0'
-  spec.add_development_dependency 'activerecord', '~> 6.0'
+  spec.add_development_dependency 'activerecord', '~> 7.1.5.2'
   spec.add_development_dependency 'sqlite3'
   spec.add_dependency 'graphql', '> 1.11'
   spec.add_dependency 'searchkick', '> 4.0'

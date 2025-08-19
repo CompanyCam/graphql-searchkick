@@ -2,12 +2,12 @@
 
 RSpec.describe GraphQL::Searchkick::SearchableExtension do
   let(:field) do
-    Field.new({
+    Field.new(
       type: ProjectType,
       name: :testing,
       search: Project,
       null: true
-    }) do
+    ) do
       argument :test, GraphQL::Types::Boolean, required: false
     end
   end
