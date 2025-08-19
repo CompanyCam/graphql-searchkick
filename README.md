@@ -3,7 +3,6 @@
 Integrate Searchkick with GraphQL Connections easily.
 
 [![Gem Version](https://badge.fury.io/rb/graphql-searchkick.svg)](https://badge.fury.io/rb/graphql-searchkick)
-[![Build Status](https://travis-ci.org/CompanyCam/graphql-searchkick.svg?branch=master)](https://travis-ci.org/CompanyCam/graphql-searchkick)
 [![Maintainability](https://api.codeclimate.com/v1/badges/1102df197f6f271b9885/maintainability)](https://codeclimate.com/github/CompanyCam/graphql-searchkick/maintainability)
 
 ## Note
